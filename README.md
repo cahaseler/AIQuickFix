@@ -2,6 +2,10 @@
 
 AI QuickFix is a Visual Studio Code extension that provides quick fixes to code issues using Artificial Intelligence, powered by GPT-4 and GPT-3.5-turbo.
 
+# How to use
+
+Write buggy code that VSCode, Typescript, or a linter like SonarLint identifies as a problem. Click on the little lightbulb that appears when you mouse over the problem, or click the Quick Fix button. Wait ~5 seconds. ChatGPT will try to fix your bug.
+
 ## Features
 
 The extension provides quick fixes to code issues using ChatGPT's API. Code issues are not found by this extension, but this extension adds a fix command to issues found by VSCode, Typescript, ESLint, and any other linter you might have like SonarLint.
