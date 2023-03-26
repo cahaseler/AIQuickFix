@@ -1,0 +1,98 @@
+{
+  "name": "aiquickfix",
+  "displayName": "AI QuickFix: Instantly fix problems with ChatGPT AI",
+  "description": "Use ChatGPT and GPT-4 AI tools to find one-click 'lightbulb menu' solutions to problems in your code flagged by your editor, linter, and other code quality tools.",
+  "publisher": "haselerdev",
+  "author": "Craig Haseler",
+  "version": "0.0.1",
+  "license": "MIT",
+    "icon": "images/icon.png",
+    "galleryBanner": {
+      "color": "#090909",
+      "theme": "light"
+    },
+  "engines": {
+    "vscode": "^1.76.0"
+  },
+  "categories": [
+    "Machine Learning", "Debuggers", "Linters", "Formatters", "Programming Languages"
+  ],
+  "bugs": {
+    "url": "https://github.com/cahaseler/aiquickfix"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/cahaseler/aiquickfix"
+  },
+  "activationEvents": [
+    "onStartupFinished"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "configuration": {
+      "type": "object",
+      "title": "GPT AI Problem Fixer Configuration",
+      "properties": {
+        "haselerdev.aiquickfix.apiKey": {
+          "type": "string",
+          "default": "",
+          "description": "API Key for OpenAI"
+        },
+        "haselerdev.aiquickfix.model": {
+          "type": "string",
+          "default": "gpt-3.5-turbo",
+          "description": "Which model to use for AI problem solving. (You need to have API access to the one you choose). This works reasonably well with GPT-3.5-turbo, but GPT-4 is better."
+        },
+        "haselerdev.aiquickfix.systemPrompt": {
+          "type": "string",
+          "default": "You are functioning in a behind-the-scenes role supporting a code problem fixing extension in VScode. You will be given a problem flagged by a linter or other tool, followed by the code that caused the problem. Please return fixed code for the problem. Make sure the code you return is an exact and full replacement for the code you are sent, and don't ever send any other messages or context, because you don't want those messages to be injected into the code! If you do really need to send an explanation, include it as a comment in the code you send, but it's unlikely you'll need to do that. If you can't fix the problem, reply only with the exact message 'I can't fix this problem' and nothing else.",
+          "description": "The system prompt giving the AI the initial instructions on what it is and what it does. If you use the GPT-4 model this is passed as a system message, if you use GPT-3.5-turbo this is sent as a user message, since OpenAI suggests that."
+        },
+        "haselerdev.aiquickfix.problemPrefix": {
+          "type": "string",
+          "default": "",
+          "description": "Text to add in front of the section from your linter describing the problem. Blank seems to work fine."
+        },
+        "haselerdev.aiquickfix.problemCodePrefix": {
+          "type": "string",
+          "default": "gpt-3.5-turbo",
+          "description": "Text to add in front of the code block context. Blank seems to work fine."
+        },
+        "haselerdev.aiquickfix.promptSuffix": {
+          "type": "string",
+          "default": "\n\nPlease, please remember to only send the fixed code, and nothing else or it will break the user's code and make them sad!",
+          "description": "Text to add after everything else. This is a good place to remind the AI to follow the format please. GPT-3.5 really needs the reminder."
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js"
+  },
+  "devDependencies": {
+    "@types/glob": "^8.1.0",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "16.x",
+    "@types/vscode": "^1.76.0",
+    "@typescript-eslint/eslint-plugin": "^5.56.0",
+    "@typescript-eslint/parser": "^5.56.0",
+    "@vscode/test-electron": "^2.3.0",
+    "eslint": "^8.36.0",
+    "glob": "^8.1.0",
+    "mocha": "^10.2.0",
+    "sinon": "^15.0.2",
+    "typescript": "^4.9.5",
+    "vscode-test": "^1.6.1"
+  },
+  "dependencies": {
+    "@types/bluebird": "^3.5.38",
+    "@types/sinon-chai": "^3.2.9",
+    "bluebird": "^3.7.2",
+    "openai": "^3.2.1,"
+  }
+}
