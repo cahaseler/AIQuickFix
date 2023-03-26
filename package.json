@@ -6,16 +6,20 @@
   "author": "Craig Haseler",
   "version": "0.0.1",
   "license": "MIT",
-    "icon": "images/icon.png",
-    "galleryBanner": {
-      "color": "#090909",
-      "theme": "light"
-    },
+  "icon": "images/icon.png",
+  "galleryBanner": {
+    "color": "#090909",
+    "theme": "light"
+  },
   "engines": {
     "vscode": "^1.76.0"
   },
   "categories": [
-    "Machine Learning", "Debuggers", "Linters", "Formatters", "Programming Languages"
+    "Machine Learning",
+    "Debuggers",
+    "Linters",
+    "Formatters",
+    "Programming Languages"
   ],
   "bugs": {
     "url": "https://github.com/cahaseler/aiquickfix"
@@ -67,7 +71,10 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "yarn run compile",
+    "vscode:prepublish": "yarn run compile && yarn run esbuild-base -- --minify",
+    "esbuild-base": "esbuild ./src/extension.ts --bundle --outfile=out/main.js --external:vscode --format=cjs --platform=node",
+    "esbuild": "npm run esbuild-base -- --sourcemap",
+    "esbuild-watch": "npm run esbuild-base -- --sourcemap --watch",
     "compile": "tsc -p ./",
     "watch": "tsc -watch -p ./",
     "pretest": "yarn run compile && yarn run lint",
@@ -82,6 +89,7 @@
     "@typescript-eslint/eslint-plugin": "^5.56.0",
     "@typescript-eslint/parser": "^5.56.0",
     "@vscode/test-electron": "^2.3.0",
+    "esbuild": "^0.17.14",
     "eslint": "^8.36.0",
     "glob": "^8.1.0",
     "mocha": "^10.2.0",
@@ -93,6 +101,6 @@
     "@types/bluebird": "^3.5.38",
     "@types/sinon-chai": "^3.2.9",
     "bluebird": "^3.7.2",
-    "openai": "^3.2.1,"
+    "openai": "^3.2.1"
   }
 }
